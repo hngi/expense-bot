@@ -1,39 +1,43 @@
-// listen on port so now.sh likes it
-const { createServer } = require('http')
-
-// bot features
-// due to the Twitter ToS automation of likes
-// is no longer allowed, so:
-const Twit = require('twit')
-const config = require('./config')
-const consoleLol = require('console.lol')
+const Twit = require('twit');
+const config = require('./config');
+const consoleLol = require('console.lol');
 
 if (!Object.values(config.twitterKeys).every(Boolean)) {
-  console.lol('ERRORDERP: Creds missing in .env file! Mocking Twitter data...');
+  console.lol('ERRORDERP: Creds missing in .env file!');
+  console.log('> Switching to Mock data...');
   return;
 }
 
-const bot = new Twit(config.twitterKeys)
+const bot = new Twit(config.twitterKeys);
 
-const retweet = require('./api/retweet')
-const reply = require('./api/reply')
+const authenticate = require('./api/authenticate');
+authenticate(bot);
 
-console.rofl('Bot starting...')
+console.lol('Bot starting...');
 
+/*
+//const retweet = require('./api/retweet')
 // retweet on keywords
 retweet()
 setInterval(retweet, config.twitterConfig.retweet)
+*/
 
+/*
+// example: tweet "hello world" 
+bot.post('statuses/update', {status: 'hello world!'}, function(err, data, res) {
+  if (err) {
+    console.lol(err);
+  }
+  console.lol(data);
+});
+*/
+
+/*
+//const reply = require('./api/reply');
 // reply to new follower
-const userStream = bot.stream('user')
-userStream.on('follow', reply)
-
-// This will allow the bot to run on now.sh
-const server = createServer((req, res) => {
-  res.writeHead(302, {
-    Location: `https://twitter.com/${config.twitterConfig.username}`
-  })
-  res.end()
-})
-
-server.listen(3000)
+const followed = require('./api/followed');
+const userStream = bot.stream(
+  'statuses/filter',
+  { track: `@${process.env.TWITTER_USERNAME}` }
+);
+userStream.on('follow', followed); */
