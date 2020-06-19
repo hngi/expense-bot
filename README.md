@@ -14,6 +14,10 @@ The public data at opentreasury.gov.ng is Nigerian Government’s commitment to 
 
 We are building an automated Twitter application at [twitter.com/ExpenseNG](https://twitter.com/expenseng) to promote awareness of the data at [opentreasury.gov.ng](https://opentreasury.gov.ng/) and/or [ExpenseNG.com](https://www.expenseng.com/) via Twitter. We believe this social presence will further improve accessibility, reaching Nigerians, among others, worldwide. The bot will periodically tweet data from the parent sources above.
 
+## Affiliation
+
+This project is not affiliated with any government or public sector entities. The information provided by [ExpenseNG.com](https://www.expenseng.com/) is for the general public and provided in good faith for general information purposes. All contributors are developer interns at [HNGi7](https://hngi7.hng.tech/) learning software development.
+
 ## Analysing Twitter Content
 
 This is how the bot will analyse Tweets, Twitter users, or their content:
