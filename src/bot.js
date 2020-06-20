@@ -1,26 +1,25 @@
 const Twit = require('twit');
 const config = require('./config');
-const consoleLol = require('console.lol');
+require('console.lol');
 
 if (!Object.values(config.twitterKeys).every(Boolean)) {
   console.lol('ERRORDERP: Creds missing in .env file!');
   console.log('> Switching to Mock data...');
-  return;
+}
+else {
+  const bot = new Twit(config.twitterKeys);
+
+  const authenticate = require('./api/authenticate');
+  authenticate(bot);
+
+  console.lol('Bot starting...');
 }
 
-const bot = new Twit(config.twitterKeys);
-
-const authenticate = require('./api/authenticate');
-authenticate(bot);
-
-console.lol('Bot starting...');
-
-/*
-//const retweet = require('./api/retweet')
 // retweet on keywords
-retweet()
-setInterval(retweet, config.twitterConfig.retweet)
-*/
+const retweet = require('./api/retweet');
+retweet();
+setInterval(retweet, config.twitterConfig.retweet);
+
 
 /*
 // example: tweet "hello world" 
