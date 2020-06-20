@@ -14,29 +14,3 @@ else {
 
   console.lol('Bot starting...');
 }
-
-// retweet on keywords
-const retweet = require('./api/retweet');
-retweet();
-setInterval(retweet, config.twitterConfig.retweet);
-
-
-/*
-// example: tweet "hello world" 
-bot.post('statuses/update', {status: 'hello world!'}, function(err, data, res) {
-  if (err) {
-    console.lol(err);
-  }
-  console.lol(data);
-});
-*/
-
-/*
-//const reply = require('./api/reply');
-// reply to new follower
-const followed = require('./api/followed');
-const userStream = bot.stream(
-  'statuses/filter',
-  { track: `@${process.env.TWITTER_USERNAME}` }
-);
-userStream.on('follow', followed); */
