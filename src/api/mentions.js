@@ -35,6 +35,39 @@ const replyMention = () => {
 	);
 };
 
+const retweetMention = () => {
+	bot.get(
+		'statuses/mentions_timeline.json?count=200&trim_user=true',
+		(err, data, response) => {
+			if (err) {
+				console.lol('ERRORDERP: Cannot get user mentions timeline');
+			} else {
+				// grab random tweet ID to retweet
+				const rando = Math.ceil(Math.random() * data.statuses.length);
+				let retweetId;
+
+				if (!isReply(data.statuses[rando])) {
+					retweetId = data.statuses[rando].id_str;
+				}
+
+				bot.post(
+					'statuses/retweet/:id',
+					{
+						id: retweetId,
+					},
+					(err, response) => {
+						if (err) {
+							console.lol('ERRORDERP: Retweet!');
+						} else {
+							console.lol('SUCCESS: RT', 'RANDOM ID: ', rando);
+						}
+					}
+				);
+			}
+		}
+	);
+};
+
 const reply = (event) => {
 	let screenName = event.source.screen_name;
 
@@ -46,4 +79,4 @@ const reply = (event) => {
 	}
 };
 
-module.exports = replyMention;
+module.exports = (replyMention, retweetMention);
