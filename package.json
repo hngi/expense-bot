@@ -1,7 +1,7 @@
 {
-  "name": "fg-expense-bot-nigeria",
+  "name": "expenseng-bot",
   "version": "0.0.1",
-  "description": "An FG-Nigeria expense bot!",
+  "description": "A Twitter Bot by ExpenseNG.com!",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -19,6 +19,7 @@
     "console.lol": "^0.1.2",
     "dotenv": "^6.1.0",
     "express": "^4.17.1",
+    "oauth": "^0.9.15",
     "twit": "^2.2.11",
     "unique-random-array": "^1.0.1"
   },
@@ -30,9 +31,7 @@
     "twitter",
     "bot",
     "hng",
-    "hngi7",
-    "expense",
-    "fg",
+    "expenseng",
     "nigeria"
   ],
   "author": "Team-Granite HNGi7 (https://hngi7.hng.tech/)",
@@ -40,15 +39,5 @@
   "bugs": {
     "url": "https://github.com/hngi/expense-bot/issues"
   },
-  "homepage": "https://github.com/hngi/expense-bot#readme",
-  "contributors": [
-    {
-      "name": "Piouson",
-      "url": "https://github.com/piouson",
-      "contributions": 1,
-      "additions": 0,
-      "deletions": 0,
-      "hireable": true
-    }
-  ]
+  "homepage": "https://github.com/hngi/expense-bot#readme"
 }
