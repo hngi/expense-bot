@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "A Twitter Bot by ExpenseNG.com!",
   "main": "server.js",
+  "engines": {
+    "node": ">=10",
+    "npm": ">=6"
+  },
   "scripts": {
     "start": "node server.js",
     "format": "pretty-quick",
