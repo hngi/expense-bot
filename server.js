@@ -1,20 +1,19 @@
 require('./src/bot');
 const express = require('express');
-const mockTweets = require("./src/mock/mock-tweets.json");
 const search = require('./src/api/search');
+const authorize = require('./src/api/authorize');
+const callback = require('./src/api/callback');
 const app = express();
 
-app.use(express.static('public'));
+app.use(express.static('src/public'));
 
-app.get("/", hello);
+app.get("/", home);
+app.get("/oauth/authorize", authorize);
+app.get("/oauth/callback", callback);
 app.get("/api/tweets/:query?", getTweets);
-app.get("/api/comments", mockResponse); /* callback should call comment() in ./src/api */
-app.get("/api/likes", mockResponse); /* callback should call like() in ./src/api */
-app.get("/api/retweets", mockResponse); /* callback should call retweet() in ./src/api */
-app.get("/api/followers", mockResponse); /* callback should call follow() in ./src/api */
 
-function hello(req, res) {
-  res.json({ greeting: "Hello, I am a Twitter bot created by ExpenseNG.com" });
+function home(req, res) {
+  res.sendFile(__dirname + '/src/views/index.html');
 }
 
 function getTweets(req, res) {
@@ -28,10 +27,6 @@ function getTweets(req, res) {
       res.json(data.statuses);
     }
   });
-}
-
-function mockResponse(req, res) {
-  res.json({data: mockTweets});
 }
 
 const listener = app.listen(process.env.PORT, function () {
