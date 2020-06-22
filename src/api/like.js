@@ -1,9 +1,3 @@
-const Twit = require('twit')
-const config = require('../config')
-const bot = new Twit(config.twitterKeys)
-const express = require('express');
-const app = express();
-app.use(express.static('../public'));
 //https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-mentions_timeline
 let like = (res) => {
   get_mentions(res)
