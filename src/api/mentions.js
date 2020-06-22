@@ -8,46 +8,66 @@ const randomReply = unique(param.randomReply.split('|'));
 
 const bot = new Twit(config.twitterKeys);
 
+function getMentions(req, res) {
+	bot.get('statuses/mentions_timeline', (err, response, data) => {
+		if (err) {
+			throw err;
+		} else if (response.length < 1) {
+			res.status(404).json({ message: 'No mentions' });
+		} else {
+			res.status(200).json(response);
+		}
+	});
+}
+
 // get the mentions timeline and automatically send back a response to a user
-const replyMention = () => {
+
+function replyMention(req, res) {
 	bot.get(
 		'statuses/mentions_timeline?count=200&trim_user=true',
-		(err, data, response) => {
+		(err, response, data) => {
 			if (err) {
-				console.error('Cannot get mentions timeline \n', err);
+				throw err;
+			} else if (response.length < 1) {
+				res.status(404).json({ message: 'No mentions on timeline' });
 			} else {
 				// grab random tweet ID to reply
-				const rando = Math.ceil(Math.random() * data.statuses.length);
+				const rando = Math.ceil(Math.random() * response.statuses.length);
 				let replyId;
 
-				if (!isReply(data.statuses[rando])) {
-					replyId = data.statuses[rando].id_str;
+				if (!isReply(response.statuses[rando])) {
+					replyId = response.statuses[rando].id_str;
 				}
 				bot.post('statuses/update', { status: reply }, (err, response) => {
 					if (err) {
 						console.lol('ERRORDERP: Cannot reply');
+						res.status(400).json('Cannot reply!!');
 					} else {
 						console.lol('SUCCESS: Reply!');
+						res.json('Reply success');
 					}
 				});
 			}
 		}
 	);
-};
+}
 
-const retweetMention = () => {
+function retweetMention(req, res) {
 	bot.get(
 		'statuses/mentions_timeline.json?count=200&trim_user=true',
-		(err, data, response) => {
+		(err, response, data) => {
 			if (err) {
-				console.lol('ERRORDERP: Cannot get user mentions timeline');
+				console.lol('ERRORDERP: Error performing request');
+				throw err;
+			} else if (response.length < 1) {
+				res.status(404).json({ message: 'No mentions on timeline' });
 			} else {
 				// grab random tweet ID to retweet
-				const rando = Math.ceil(Math.random() * data.statuses.length);
+				const rando = Math.ceil(Math.random() * response.statuses.length);
 				let retweetId;
 
-				if (!isReply(data.statuses[rando])) {
-					retweetId = data.statuses[rando].id_str;
+				if (!isReply(response.statuses[rando])) {
+					retweetId = response.statuses[rando].id_str;
 				}
 
 				bot.post(
@@ -66,7 +86,7 @@ const retweetMention = () => {
 			}
 		}
 	);
-};
+}
 
 const reply = (event) => {
 	let screenName = event.source.screen_name;
@@ -79,4 +99,4 @@ const reply = (event) => {
 	}
 };
 
-module.exports = (replyMention, retweetMention);
+module.exports = (replyMention, retweetMention, getMentions);
