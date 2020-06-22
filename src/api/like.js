@@ -1,3 +1,7 @@
+const Twit = require('twit')
+const config = require('../config')
+const bot = new Twit(config.twitterKeys)
+
 //https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-mentions_timeline
 let like = (res) => {
   get_mentions(res)
