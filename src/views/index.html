@@ -25,7 +25,10 @@
           api access to thier Twitter account.</li>
         <li><code>GET [domain_url]/api/timeline/mentions</code><br>timeline hashtags <code>#expenseng</code>and mentions
           <code>@expenseng</code></li>
-        <li><code>GET [domain_url]/api/timeline/mentions/like</code><br>like Tweets that mentions or tags the bot</li>
+        <li><code>POST [domain_url]/api/timeline/mentions/retweet</code><br>retweet Tweets that mentions the bot</li>
+        <li><code>POST [domain_url]/api/timeline/mentions/like</code><br>like Tweets that mentions or tags the bot</li>
+        <li><code>POST [domain_url]/api/tweets/hashtags/retweet</code><br>retweet tweets that contain
+          <code>#expenseng</code></li>
       </ol>
 
       <h3>Click to view</h3>
@@ -36,6 +39,11 @@
         <li>
           <form class="like-tweets" method="POST" action="api/timeline/mentions/like">
             <button type="submit">api/timeline/mentions/like</button>
+          </form>
+        </li>
+        <li>
+          <form action="api/tweets/hashtags/retweet" method="post">
+            <button type="submit">api/tweets/hashtags/retweet</button>
           </form>
         </li>
       </ul>

@@ -3,11 +3,8 @@ const express = require('express');
 const search = require('./src/api/search');
 const authorize = require('./src/api/authorize');
 const callback = require('./src/api/callback');
-<<<<<<< HEAD
-const like = require('./src/api/like')
-=======
 const like = require('./src/api/like');
->>>>>>> faed880d4a44cd7b1488fa27af2ef10771c0689e
+const { retweet, retweetMention } = require('./src/api/retweet');
 const getMentions = require('./src/api/mentions');
 const app = express();
 
@@ -17,13 +14,10 @@ app.get('/', home);
 app.get('/oauth/authorize', authorize);
 app.get('/oauth/callback', callback);
 app.get('/api/tweets/:query?', getTweets);
-<<<<<<< HEAD
-app.get('/api/timeline/mentions', getMentions)
-app.post('/api/timeline/mentions',likeUsers)
-=======
+app.post('/api/tweets/hashtags/retweet', retweet);
 app.get('/api/timeline/mentions', getMentions);
 app.post('/api/timeline/mentions/like', likeUsers);
->>>>>>> faed880d4a44cd7b1488fa27af2ef10771c0689e
+app.post('/api/timeline/mentions/retweet', retweetMention);
 
 function home(req, res) {
   res.sendFile(__dirname + '/src/views/index.html');
@@ -36,7 +30,7 @@ function likeUsers(req, res) {
 function getTweets(req, res) {
   const query = req.params.query || `#${process.env.TWITTER_USERNAME}`;
 
-  search(query, function(err, data) {
+  search(query, function (err, data) {
     if (err) {
       res.json([]);
     } else {
@@ -45,6 +39,6 @@ function getTweets(req, res) {
   });
 }
 
-const listener = app.listen(process.env.PORT, function() {
+const listener = app.listen(process.env.PORT, function () {
   console.lol('Your app is listening on port ' + listener.address().port);
 });
