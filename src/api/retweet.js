@@ -1,10 +1,5 @@
 const Twit = require('twit');
 const config = require('../config');
-const unique = require('unique-random-array');
-const param = config.twitterConfig;
-const search = require('./search');
-const { response } = require('express');
-const queryString = unique(param.queryString.split(','));
 const bot = new Twit(config.twitterKeys);
 
 const retweetMention = async (req, res, next) => {
