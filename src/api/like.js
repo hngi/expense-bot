@@ -40,11 +40,11 @@ let favoriteTweet = async (data, res) => {
     bot.post('favorites/create', { id: e }, function (err, response) {
       if (err) {
         console.log('CANNOT BE FAVORITE... Error', err);
-        return errorMessage.push({ message: err.message, tweetId: e });
+        return errorMessage.push({ message: '🚫', err.message, tweetId: e });
       }
       successMessage.push(
         {
-          message: 'Liked',
+          message: '♥️ Liked',
           tweetId: e
         }
       )
@@ -53,7 +53,7 @@ let favoriteTweet = async (data, res) => {
     console.log(e);
   });
   setTimeout(() => {
-    res.status(403).json(errorMessage || successMessage);
+    res.status(403).json([...errorMessage,...successMessage]);
   }, 3000);
   
   console.log('reuslt', result)
