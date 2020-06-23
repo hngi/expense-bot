@@ -1,16 +1,13 @@
 # FG Expense Bot
 
+## Project setup
+
+1. Copy the contents of .env.example to .env > `cp .env.example .env`
+2. npm install
+3. npm run lint
+4. npm run dev
+
 ## Links
 
-- [create-a-simple-twitter-bot-with-node-js](https://hackernoon.com/create-a-simple-twitter-bot-with-node-js-5b14eb006c08#.flysreo60)
-- [how-to-make-a-twitter-bot-with-nodejs](https://chatbotslife.com/how-to-make-a-twitter-bot-with-nodejs-d5cb04fdbf97#.h5ah8dq5n)
-- [twitter-mctwitbot](https://medium.com/@spences10/twitter-mctwitbot-4d15cd005dc0#.dp9q5f427)
-- [awesome-twitter-bots](https://github.com/amandeepmittal/awesome-twitter-bots)
-
-Base code from [Twitter bot bootstrap](https://github.com/spences10/twitter-bot-bootstrap)
-
-## License
-
-MIT License
-
-Copyright (c) 2020, Team Granite HNGi7. All rights reserved.
+- Boilerplate code from [Twitter bot bootstrap](https://github.com/spences10/twitter-bot-bootstrap)
+- Webhooks from [Subscribe to account activity](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/guides/twitter-account-activity-tutorial-autohook)
