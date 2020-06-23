@@ -18,6 +18,8 @@ module.exports = function(req, res, next) {
     const crc = validateWebhook(req.query.crc_token, auth, res);
     res.writeHead(200, { "content-type": "application/json" });
     res.end(JSON.stringify(crc));
+  } else {
+    next();
   }
 
   if (
