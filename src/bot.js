@@ -1,6 +1,7 @@
 const Twit = require("twit");
 const config = require("./config");
 require("console.lol");
+const initializeAutohook = require("./helpers/initializeAutohook");
 
 if (!Object.values(config.twitterKeys).every(Boolean)) {
   console.lol("ERRORDERP: Creds missing in .env file!");
@@ -12,6 +13,7 @@ if (!Object.values(config.twitterKeys).every(Boolean)) {
   authenticate(bot);
 
   console.lol("Bot starting...");
+  initializeAutohook();
 
   // autohook();
 

@@ -6,7 +6,6 @@ const callback = require("./src/api/callback");
 const like = require("./src/api/like");
 const getMentions = require("./src/api/mentions");
 const crc = require("./src/helpers/crc");
-const initializeAutohook = require("./src/helpers/initializeAutohook");
 const app = express();
 
 app.use(express.static("src/public"));
@@ -41,17 +40,6 @@ function getTweets(req, res) {
   });
 }
 
-const startListening = async () => {
-  try {
-    app.listen(process.env.PORT, function() {
-      console.lol("Your app is listening on port " + process.env.PORT);
-    });
-
-    initializeAutohook();
-  } catch (err) {
-    console.error(err);
-    process.exit(-1);
-  }
-};
-
-startListening();
+const listener = app.listen(process.env.PORT, function() {
+  console.lol("Your app is listening on port " + listener.address().port);
+});
