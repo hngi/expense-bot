@@ -3,6 +3,8 @@ const express = require('express');
 const search = require('./src/api/search');
 const authorize = require('./src/api/authorize');
 const callback = require('./src/api/callback');
+const like = require('./src/api/like')
+const getMentions = require('./src/api/mentions');
 const app = express();
 
 app.use(express.static('src/public'));
@@ -11,9 +13,19 @@ app.get('/', home);
 app.get('/oauth/authorize', authorize);
 app.get('/oauth/callback', callback);
 app.get('/api/tweets/:query?', getTweets);
+app.get('/api/timeline/mentions', getMentions)
+app.post('/api/timeline/mentions',likeUsers)
 
 function home(req, res) {
   res.sendFile(__dirname + '/src/views/index.html');
+}
+
+function likeUsers(req, res) {
+  //it likes users that tags it in hashtags(#) or mentions(@)
+  like(res)
+  // setInterval(() => {
+  //   like(res)
+  // }, 30000);
 }
 
 function getTweets(req, res) {
