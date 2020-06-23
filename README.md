@@ -29,7 +29,7 @@ To get a local development server up and running there are a few steps to follow
 2. Once the session starts, copy the https url (e.g. https://650f0a2c12f0.ngrok.io) and populate the .env file. Note, you will need to update this value everytime you start a new session as the URL is never the same with every new session.
 
 ```
-PORT_FORWARDING_URL=
+BASE_URL=
 ```
 
 3. In your terminal, run `npm run dev`.

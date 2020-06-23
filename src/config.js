@@ -14,7 +14,7 @@ module.exports = {
     consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
     env: process.env.TWITTER_WEBHOOK_ENV,
   },
-  portForwardingUrl: process.env.PORT_FORWARDING_URL,
+  baseUrl: process.env.BASE_URL,
   twitterConfig: {
     queryString: process.env.QUERY_STRING,
     resultType: process.env.RESULT_TYPE,
