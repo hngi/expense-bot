@@ -14,7 +14,7 @@ if (!Object.values(config.twitterKeys).every(Boolean)) {
 
   console.lol('Bot starting...');
 
-  autohook();
+  //autohook();
 
   /*
   bot.post('statuses/update', {
