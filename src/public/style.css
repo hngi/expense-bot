@@ -35,3 +35,12 @@ code {
 a {
 	color: #2574A9;
 }
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #069;
+	font-size: 1.1rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
