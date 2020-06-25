@@ -8,7 +8,7 @@ let like = res => {
 };
 
 let get_mentions = res => {
-  bot.get('statuses/mentions_timeline', function(err, data) {
+  bot.get('statuses/mentions_timeline', function (err, data) {
     if (err) {
       console.log('Error , can get your mentions', err);
     } else {
@@ -35,19 +35,28 @@ let get_mentions = res => {
 
 let favoriteTweet = async (data, res) => {
   let errorMessage = [];
-  let result = await data.forEach(e => {
-    bot.post('favorites/create', { id: e }, function(err, response) {
+  let successMessage = []
+  let result = data.forEach(e => {
+    bot.post('favorites/create', { id: e }, function (err, response) {
       if (err) {
-        errorMessage.push({ message: err.message, tweetId: e });
-        res.status(403).json(errorMessage);
         console.log('CANNOT BE FAVORITE... Error', err);
-      } else {
-        res.status(200).json('Done', e);
-        console.log('FAVORITED... Success!!!');
+        return errorMessage.push({ message: '🚫', err.message, tweetId: e });
       }
+      successMessage.push(
+        {
+          message: '♥️ Liked',
+          tweetId: e
+        }
+      )
+      console.log('FAVORITED... Success!!!');
     });
     console.log(e);
   });
+  setTimeout(() => {
+    res.status(403).json([...errorMessage,...successMessage]);
+  }, 3000);
+  
+  console.log('reuslt', result)
 };
 
 module.exports = like;
