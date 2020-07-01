@@ -3,6 +3,7 @@ const auth = require("config").get("auth");
 const port = require("config").get("server").port;
 const Twit = require("twit");
 import { Autohook } from "twitter-autohook";
+const handleDirectMessage = require("./events/handlers/direct_messages");
 
 const bot = {
   async initilaize() {
@@ -24,6 +25,11 @@ const bot = {
     this.webhook = new Autohook(auth);
 
     // assign event handlers here
+    this.webhook.on("event", async (event) => {
+      if (event.direct_message_events) {
+        handleDirectMessage(event);
+      }
+    });
 
     await this.webhook.removeWebhooks();
     await this.webhook.start(webhookURL);
