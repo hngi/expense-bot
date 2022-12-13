@@ -30,7 +30,7 @@
   "dependencies": {
     "console.lol": "^0.1.2",
     "dotenv": "^6.1.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "oauth": "^0.9.15",
     "twit": "^2.2.11",
     "twitter-autohook": "^1.7.1",
